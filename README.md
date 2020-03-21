@@ -1,5 +1,7 @@
 # Vince-Sequelize-Automate
 
+该组件通过 sequelize-automate 组件进行改造 [github](https://github.com/nodejh/sequelize-automate.git)
+
 Automatically generate models for [SequelizeJS](https://github.com/sequelize/sequelize). Support javascript, typescript, egg.js and midway.
 
 ## Installing

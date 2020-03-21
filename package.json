@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nodejh/sequelize-automate.git"
+    "url": "https://github.com/liang-yongheng/vince-sequelize-automate.git"
   },
   "bugs": {
-    "url": "https://github.com/nodejh/sequelize-automate/issues"
+    "url": "https://github.com/liang-yongheng/vince-sequelize-automate/issues"
   },
   "nyc": {
     "exclude": [
@@ -34,7 +34,7 @@
   "engines": {
     "node": ">=0.10"
   },
-  "author": "nodejh <jianghangscu@gmail.com>",
+  "author": "vince <873468428@qq.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/generator": "^7.7.4",
@@ -60,6 +60,5 @@
     "tedious": "^6.6.2"
   },
   "__npminstall_done": "Sat Mar 21 2020 15:00:55 GMT+0800 (中国标准时间)",
-  "_from": "sequelize-automate@1.2.0",
-  "_resolved": "https://registry.npm.taobao.org/sequelize-automate/download/sequelize-automate-1.2.0.tgz"
+  "_from": "sequelize-automate@1.2.0"
 }
