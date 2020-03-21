@@ -40,7 +40,7 @@ function getDefaultValue(field, dialect) {
   if (_.isString(field.defaultValue)) {
     const fieldType = field.type.toLowerCase();
     if (_.endsWith(field.defaultValue, '()')) {
-      defaultValue = `sequelize.fn('${field.defaultValue.replace(
+      defaultValue = `DataTypes.fn('${field.defaultValue.replace(
         /\(\)$/,
         '',
       )}')`;

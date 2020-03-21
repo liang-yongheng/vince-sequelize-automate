@@ -1,0 +1,32 @@
+{
+  "dbOptions": {
+    "database": "v_admin",
+    "username": "root",
+    "password": "",
+    "dialect": "mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "logging": false,
+    "define": {
+      "underscored": false,
+      "freezeTableName": false,
+      "charset": "utf8",
+      "timezone": "+08:00",
+      "dialectOptions": {
+        "collate": "utf8_general_ci"
+      },
+      "timestamps": false
+    }
+  },
+  "options": {
+    "type": "egg",
+    "camelCase": false,
+    "dir": "./model/admin",
+    "fileNameCamelCase": true,
+    "emptyDir": true,
+    "tables": null,
+    "skipTables": null,
+    "tsNoCheck": false,
+    "tablePrefix": "v_"
+  }
+}

@@ -17,6 +17,8 @@ function getDefaultValueExpression(defaultValue) {
   if (_.isString(defaultValue)) {
     if (defaultValue.toLowerCase().indexOf('sequelize') === 0) {
       return parse(defaultValue).program.body[0].expression;
+    } else if (defaultValue.toLowerCase().indexOf('datatypes') === 0) {
+      return parse(defaultValue).program.body[0].expression;
     }
     return t.stringLiteral(defaultValue);
   }
