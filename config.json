@@ -19,7 +19,7 @@
     }
   },
   "options": {
-    "type": "egg",
+    "type": "egg-ts",
     "camelCase": false,
     "dir": "./model/admin",
     "fileNameCamelCase": true,

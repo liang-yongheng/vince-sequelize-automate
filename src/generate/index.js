@@ -9,14 +9,16 @@ const processMidway = require('./midway');
  * @param {object} options
  */
 function generate(definition, options) {
-  const { type, tsNoCheck } = options;
+  const { type, tsNoCheck, dbModel } = options;
   switch (type) {
     case 'js':
       return processJS(definition, { isEgg: false });
     case 'ts':
       return processTS(definition, { tsNoCheck });
+    case 'egg-ts':
+      return processTS(definition, { tsNoCheck, isEgg: true, dbModel });
     case 'egg':
-      return processJS(definition, { isEgg: true });
+      return processJS(definition, { isEgg: true, dbModel });
     case 'midway':
       return processMidway(definition, { tsNoCheck });
     case '@ali/midway':

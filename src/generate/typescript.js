@@ -20,15 +20,17 @@ const {
  * @param {object} options
  */
 function generateCode(definition, options) {
-  const source = fs
-    .readFileSync(join(__dirname, './template/typescript/user.text'))
+  let template = options.isEgg ? './template/egg-ts/user.text' : './template/typescript/user.text';
+  let source = fs
+    .readFileSync(join(__dirname, template))
     .toString();
-
+  if (options.dbModel) {
+    source = source.replace('.model.', `.${options.dbModel}.`);
+  }
   const ast = parse(source, {
     sourceType: 'module',
     plugins: ['typescript'],
   });
-
   traverse(ast, {
     VariableDeclarator: (path) => {
       const { node } = path;

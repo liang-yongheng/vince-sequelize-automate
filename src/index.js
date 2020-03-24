@@ -29,7 +29,7 @@ class Automate {
     // default `options.typesDir` is the same with `options.dir`
     this.options.typesDir = this.options.typesDir || this.options.dir;
 
-    const supportTypes = ['js', 'ts', 'egg', 'midway', '@ali/midway'];
+    const supportTypes = ['js', 'ts', 'egg', 'egg-ts', 'midway', '@ali/midway'];
     assert(supportTypes.includes(this.options.type), 'type not support');
     assert(_.isBoolean(this.options.camelCase), 'Invalid params camelCase');
     assert(_.isBoolean(this.options.fileNameCamelCase), 'Invalid params fileNameCamelCase');
@@ -87,6 +87,9 @@ class Automate {
     const tableForeignKeys = await Promise.all(tableNames.map(
       (tableName) => this.queryInterface.getForeignKeyReferencesForTable(tableName),
     ));
+    const tableComments = await Promise.all(tableNames.map(
+      (tableName) => this.getTablesComment(tableName),
+    ));
 
     const tables = {};
     tableNames.forEach((tableName, i) => {
@@ -94,12 +97,24 @@ class Automate {
         structures: tableStructures[i],
         indexes: tableIndexes[i],
         foreignKeys: tableForeignKeys[i],
+        tableComment: tableComments[i],
       };
     });
 
     this.sequelize.close();
     debug('sequelize close');
     return tables;
+  }
+
+  async getTablesComment(tableName) {
+    let tableComment = '';
+    const dbName = this.sequelize.getDatabaseName();
+    const commentSql = `select table_comment from information_schema.tables where table_name = '${tableName}' and table_schema = '${dbName}'`;
+    let commentRes = await this.sequelize.query(commentSql, { type: this.sequelize.QueryTypes.SELECT });
+    if (commentRes.length > 0) {
+      tableComment = commentRes[0].table_comment;
+    }
+    return tableComment;
   }
 
   async getDefinitions() {
@@ -136,6 +151,7 @@ class Automate {
       dir,
       typesDir,
       emptyDir,
+      dbModel = 'model'
     } = this.options;
     const definitions = await this.getDefinitions({
       tables,
@@ -146,6 +162,7 @@ class Automate {
     let codes = generate(definitions, {
       type,
       tsNoCheck,
+      dbModel
     });
     if (dir) {
       await write(codes, { dir, typesDir, emptyDir });

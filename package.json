@@ -1,6 +1,6 @@
 {
   "name": "vince-sequelize-automate",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Automatically generate bare sequelize models from your database.",
   "main": "index",
   "keywords": [

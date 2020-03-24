@@ -144,7 +144,7 @@ function processOptionsProperties(nodes, definition) {
                 t.booleanLiteral(Boolean(value.unique)),
               ),
               value.type && t.objectProperty(
-                t.identifier('type'),
+                t.identifier('using'),
                 t.stringLiteral(value.type),
               ),
               t.objectProperty(

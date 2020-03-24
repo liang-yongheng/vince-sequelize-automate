@@ -1,8 +1,7 @@
-'use strict';
+import { Application } from 'egg';
 
-module.exports = app => {
-  const DataTypes = app.Sequelize;
-  const Sequelize = app.Sequelize;
+export default (app: Application) => {
+  const { Sequelize, DataTypes } = app.Sequelize;
   const attributes = {
     id: {
       type: DataTypes.BIGINT,
@@ -54,6 +53,8 @@ module.exports = app => {
   const options = {
     tableName: 'user',
     comment: 'user table',
+    freezeTableName: false,
+    timestamps: false,
     indexes: [{
       name: 'uk_name_email',
       unique: true,
@@ -63,7 +64,6 @@ module.exports = app => {
       ],
     }]
   };
-
   const UserModel = app.model.define('userModel', attributes, options);
   return UserModel;
-};
+}

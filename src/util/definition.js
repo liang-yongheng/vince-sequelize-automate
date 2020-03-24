@@ -60,7 +60,7 @@ function getDefaultValue(field, dialect) {
           field.defaultValue.toLowerCase(),
         )
       ) {
-        defaultValue = `DataTypes.literal('${field.defaultValue}')`;
+        defaultValue = `Sequelize.literal('${field.defaultValue}')`;
       }
     }
   }
@@ -105,7 +105,8 @@ function getDataType(field) {
   if (attr.match(/^(smallint|mediumint|tinyint|int)/)) {
     const typeInt = attr.match(/^bigint/) ? 'BIGINT' : 'INTEGER';
 
-    let type = `DataTypes.${typeInt}${typeLength}`;
+    // let type = `DataTypes.${typeInt}${typeLength}`;
+    let type = `DataTypes.${typeInt}`;
     const unsigned = attr.match(/unsigned/i);
     if (unsigned) {
       type += '.UNSIGNED';
@@ -224,14 +225,13 @@ function processTable({
     } else if (index.unique && fields.length === 1) {
       const field = getFieldName(fields[0], camelCase);
       attributes[field].unique = index.name;
-    } else {
-      indexes.push({
-        name: index.name,
-        unique: index.unique,
-        type: index.type,
-        fields,
-      });
     }
+    indexes.push({
+      name: index.name,
+      unique: index.unique,
+      type: index.type,
+      fields,
+    });
   });
 
   _.forEach(foreignKeys, (foreignKey) => {
@@ -264,7 +264,6 @@ function getModelDefinitions(tables, options) {
       foreignKeys: table.foreignKeys,
       options: { camelCase, dialect },
     });
-
     const modelName = getModelName(tableName, camelCase);
     const modelFileName = getFieldName(tableName, fileNameCamelCase, tablePrefix);
     return {
@@ -273,6 +272,7 @@ function getModelDefinitions(tables, options) {
       tableName,
       attributes,
       indexes,
+      tableComment: table.tableComment
     };
   });
 

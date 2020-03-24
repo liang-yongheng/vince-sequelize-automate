@@ -24,7 +24,7 @@ const { argv } = yargs
   .option('type', {
     alias: 't',
     describe: 'Which code style want to generate.',
-    choices: ['js', 'ts', 'egg', 'midway', '@ali/midway'],
+    choices: ['js', 'ts', 'egg', 'egg-ts', 'midway', '@ali/midway'],
   })
   .option('host', {
     alias: 'h',
@@ -110,7 +110,8 @@ const options = _.assign({}, {
   camelCase: !!argv.C,
   dir: argv.o || path.resolve(`${process.cwd()}/models`),
   emptyDir: !!argv.r,
-  tablePrefix: ''
+  tablePrefix: '',
+  dbModel: 'model'
 }, configFile ? configFile.options : {});
 
 const dbOptionsCopy = _.cloneDeep(dbOptions);
