@@ -1,6 +1,6 @@
 import { Application } from 'egg';
 
-export default (app: Application) => {
+export default function(app: Application) {
   const { Sequelize, DataTypes } = app.Sequelize;
   const attributes = {
     id: {

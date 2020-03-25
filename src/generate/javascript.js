@@ -19,10 +19,12 @@ const {
  */
 function generateCode(definition, options) {
   const file = options.isEgg ? './template/egg/user.text' : './template/javascript/user.text';
-  const source = fs
+  let source = fs
     .readFileSync(join(__dirname, file))
     .toString();
-
+  if (options.dbModel) {
+    source = source.replace('.model.', `.${options.dbModel}.`);
+  }
   const ast = parse(source, {
     strictMode: true,
   });

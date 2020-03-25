@@ -19,7 +19,7 @@
     }
   },
   "options": {
-    "type": "egg-ts",
+    "type": "egg",
     "camelCase": false,
     "dir": "./model/admin",
     "fileNameCamelCase": true,
@@ -27,6 +27,7 @@
     "tables": null,
     "skipTables": null,
     "tsNoCheck": false,
-    "tablePrefix": "v_"
+    "tablePrefix": "v_",
+    "dbModel": "adminModel"
   }
 }

@@ -68,6 +68,9 @@ function generateCode(definition, options) {
         node.argument = t.identifier(bigCamelCase(definition.modelName));
       }
     },
+    // ArrowFunctionExpression: (path) => {
+    //   const { node } = path;
+    // },
   });
 
   if (options.tsNoCheck) {
